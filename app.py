@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from decimal import Decimal
 from bs4 import BeautifulSoup
 from sqlalchemy import true
-from app.models.BackgroundTasks import BackgroundTasks
+from BackgroundTasks import BackgroundTasks
 
 
 load_dotenv()
