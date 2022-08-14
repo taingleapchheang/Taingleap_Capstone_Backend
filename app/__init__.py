@@ -1,5 +1,4 @@
 from email import header
-from re import sub
 from sched import scheduler
 import smtplib
 from flask import Flask, request,make_response, abort,jsonify
@@ -42,8 +41,7 @@ def get_search_result(search_input):
 
     products = response.json()["search_results"]
     return jsonify(products)
-    
-    # return jsonify(response.json())
+
 
 @app.route("/offers/<asin>", methods = ["GET"])
 def get_offer_for_one_product_result(asin):
@@ -53,10 +51,10 @@ def get_offer_for_one_product_result(asin):
         params={"api_key": rainforest_key, "type": "offers", "amazon_domain": "amazon.com", "asin":asin} 
     )
     offers = response.json()["offers"]
-    return json.dump(offers)
+    return jsonify(offers)
     
 
-@app.route('/')
+@app.route('/table')
 def root_route():
     dynamodb.create_a_productList_table()
     return 'Hello World'
@@ -151,7 +149,6 @@ def update_an_item_price(asin):
 @app.route('/scheduler/resume', methods=['POST'])
 def resume_scheduled_job():
     global scheduler 
-
     if scheduler.get_is_started():
         return("The scheduled job has already been started ")
     else:
