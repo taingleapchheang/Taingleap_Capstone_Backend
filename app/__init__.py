@@ -120,7 +120,7 @@ def delete_an_item(asin):
     abort(make_response({"msg": "Some error occcured", "response": response}, 400))
 
 
-@app.route('/productlist', methods=['GET'])
+@app.route('/products', methods=['GET'])
 def get_all_items():
 
     item = dynamodb.get_all_items_from_database()
@@ -133,7 +133,7 @@ def get_all_items():
         abort(make_response({"msg": "Item not found"}, 404))
 
 
-@app.route('/productlist/<string:asin>', methods=['PUT'])
+@app.route('/products/<string:asin>', methods=['PUT'])
 def update_an_item_price(asin):
 
     data = request.get_json()
