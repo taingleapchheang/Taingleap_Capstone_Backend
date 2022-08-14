@@ -1,1 +1,1 @@
-web: gunicorn shop-smart-backend:app
+web: gunicorn __init__:app
